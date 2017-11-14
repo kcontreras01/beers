@@ -4,6 +4,42 @@ const API_KEY = process.env.API_KEY;
 
 const Beers = {};
 
+
+Beers.search = (req, res, next) => {
+        const { search } = req.body;
+        const beersData = [];
+    		axios.get(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
+            .then(beerData => {
+                console.log('beersData is ', beerData.data);
+                beerData.data.data.forEach(beer => {
+                    let id = beer.id;
+                    let name = beer.name;
+                    let description = beer.description;
+                    let website = beer.website;
+                    let images = beer.images;
+                    beersData.push({
+                        id: id,
+                        name: name,
+                        description: description,
+                        website: website,
+                        images: images,
+                    }) //end of push
+                }) //end of forEach
+                res.locals.beersData = beersData;
+                next();
+            }).catch(err => { console.log('error in beers.search', err) })
+    },
+
+
+// Beers.findOne = (req, res, next) => {
+//     let search = req.query.q;
+//     axios.get(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
+//         .then(oneBeer => {
+//             res.locals.oneBeer = oneBeer.data
+//             next();
+//         });
+// }
+
 Beers.findAll = (req, res, next) => {
 	db.many('SELECT * FROM beers')
 	.then((allBeers) => {

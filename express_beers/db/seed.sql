@@ -12,11 +12,12 @@ CREATE TABLE beers (
   id SERIAL PRIMARY KEY,
   name VARCHAR,
   description VARCHAR,
-  image VARCHAR,
+  images VARCHAR,
+  website VARCHAR,
   user_id INT REFERENCES users (id)
 );
 
-INSERT INTO beers (name, description, image) VALUES ('kiara', 'hot chili', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, image) VALUES ('leo', 'smol boi', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, image) VALUES ('becca', 'gin', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, image) VALUES ('jon', 'pork', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
+INSERT INTO beers (name, description, website, images) VALUES ('kiara', 'hot chili',  'website','https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
+INSERT INTO beers (name, description, website, images) VALUES ('leo', 'smol boi', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
+INSERT INTO beers (name, description, website, images) VALUES ('becca', 'gin', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
+INSERT INTO beers (name, description, website, images) VALUES ('jon', 'pork', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');

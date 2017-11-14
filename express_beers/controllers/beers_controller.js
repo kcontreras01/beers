@@ -6,11 +6,23 @@ const auth = require('../services/auth');
 const Beers = require('../models/beers_model');
 // const User = require('../models/users_model');
 
+// router.get('/', Beers.findOne, (req, res) => {
+//     // console.log('Rendering one beer', res.locals.oneBeer);
+//     const beerData = { data: res.locals.oneBeer };
+//     res.json(beerData);
+// });
+
+router.post('/search',
+    Beers.search,
+    (req, res) => {
+        const { beersData } = res.locals;
+        res.json({ "beersData": beersData });
+    });
 
 router.get('/', Beers.findAll, 
 	(req, res) => {
 		res.json({
-			notes: res.locals.allBeers
+			beers: res.locals.allBeers
 		});
 	});
 
@@ -18,14 +30,14 @@ router.get('/', Beers.findAll,
 router.get('/:id', Beers.findById,
 	(req, res) => {
 		res.json({
-			notes: res.locals.beer
+			beers: res.locals.beer
 		});
 	});
 
 router.post('/', Beers.create,
 	(req, res) => {
 		res.json({
-			notes: res.locals.newBeer
+			beers: res.locals.newBeer
 		});
 	});
 
