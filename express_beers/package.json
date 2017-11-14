@@ -1,0 +1,27 @@
+{
+  "name": "express_beers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.0",
+    "mustache-express": "^1.2.5",
+    "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg-promise": "^7.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
