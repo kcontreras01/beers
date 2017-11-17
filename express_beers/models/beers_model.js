@@ -7,6 +7,7 @@ const Beers = {};
 
 Beers.search = (req, res, next) => {
         const { search } = req.body;
+        console.log("THIS IS THE SEARCH", search)
         const beersData = [];
     		axios.get(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
             .then(beerData => {
