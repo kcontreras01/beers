@@ -1,16 +1,7 @@
 const router = require('express').Router();
 const auth = require('../services/auth');
-// const API_KEY = process.env.API_KEY;
-// const API_URL = `http://api.brewerydb.com/v2/search?q=${search}&key=`;
-
 const Beers = require('../models/beers_model');
 // const User = require('../models/users_model');
-
-// router.get('/', Beers.findOne, (req, res) => {
-//     // console.log('Rendering one beer', res.locals.oneBeer);
-//     const beerData = { data: res.locals.oneBeer };
-//     res.json(beerData);
-// });
 
 router.post('/search',
     Beers.search,

@@ -31,15 +31,6 @@ Beers.search = (req, res, next) => {
     },
 
 
-// Beers.findOne = (req, res, next) => {
-//     let search = req.query.q;
-//     axios.get(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
-//         .then(oneBeer => {
-//             res.locals.oneBeer = oneBeer.data
-//             next();
-//         });
-// }
-
 Beers.findAll = (req, res, next) => {
 	db.many('SELECT * FROM beers')
 	.then((allBeers) => {

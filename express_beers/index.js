@@ -3,25 +3,18 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const mustacheExpress = require('mustache-express');
 
 const logger = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+
+app.use(cors());
 // body-parser setup.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-// view setup.
-app.engine('html', mustacheExpress());
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
-
-// asset setup.
-app.use(express.static(__dirname + '/public'));
 
 // auth setup.
 app.use(session({
