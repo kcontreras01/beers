@@ -138,6 +138,7 @@ class SearchScreen extends React.Component {
     this.state = {
       text: "Beer Name",
       search: "",
+      saved: [],
       results: []
     };
 
@@ -150,21 +151,21 @@ class SearchScreen extends React.Component {
     title: "Find A Beer"
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchData();
   }
 
   fetchData() {
     let url = "https://morning-oasis-96903.herokuapp.com/beers";
-    console.log("In fetchData. url:", url);
     fetch(url)
       .then(response => response.json())
       .then(responseData => {
-        console.log("in fetchData callback. responseData:", responseData);
-        // this.setState({
-        //   // console.log(responseData)
-        //   results: responseData.results
-        // });
+        // console.log("in fetchData callback. responseData:", responseData);
+        this.setState({
+          // console.log(responseData.results)
+          saved: responseData
+        });
+        // console.log("the state in fetch is", this.state.saved)
       })
       .catch(err => console.log(err));
   }
@@ -177,59 +178,64 @@ class SearchScreen extends React.Component {
   }
 
   onSubmit(e) {
+    console.log("In onSubmit.");
     // console.log("------------------------------------");
-    console.log("In onSubmit. e.constructor:", e.constructor);
+    // console.log("In onSubmit. e.constructor:", e.constructor);
     e.preventDefault();
     e.stopPropagation();
     // console.log("made it here!");
-    let url = "https://morning-oasis-96903.herokuapp.com/beers/search";
-    // console.log("url:", url);
+    console.log("this.state.search:", this.state.search);
+    let url = "https://morning-oasis-96903.herokuapp.com/beers/search",
+      body = JSON.stringify({
+        search: this.state.search
+      });
+    console.log("made it here");
+    console.log("body:", body);
     fetch(url, {
       method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        search: this.state.search
-      })
+      body: body
     })
       .then(response => {
-        console.log("received response. response:", response);
-        return response.json();
-        
-        // return response.json();
-        // this is receiving the data
-      })
-      .then(response => {
+        console.log("in .then of fetch in onSubmit");
         console.log("response:", response);
-        this.setState(
-          {
-            results: response.data
-          },
-          this.renderResults
-        );
+        return response.json();
+      })
+      .then(responseData => {
+        console.log("got a response");
+        console.log("response:", responseData);
+        this.setState({
+          results: responseData
+        });
       })
       .catch(err => {
         console.log("caught error", err);
       });
+    // console.log("the state in onSubmit is", this.state.results);
   }
 
   renderResults() {
-    // console.log("in renderResults.");
-    // console.log("this.state:", this.state);
-    console.log("------------------------------------");
-    // console.log("this.state.results:", this.state.results);
-    let els = this.state.results.map((e, i) => {
-      return <Text key={i}>{e.name}</Text>;
-
-      // return <Text>{e["name"]}</Text>;
-    });
-    console.log("els:", els);
-    return els;
+    console.log("in renderResults.");
+    console.log('this.state.results.beersData:', this.state.results.beersData);
+    console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
+    if (this.state.results.beersData) { 
+      console.log('got beersData')
+      return this.state.results.beersData.map((x)=>{
+        console.log("x:", x);
+        return <Text>{x.name}</Text>
+      });
+    } else {
+      console.log('no beersData')
+      return null;
+    }
   }
 
   render() {
+    console.log("------------------------------------");
+    console.log("In render.");
     return (
       <View>
         <Text>Search</Text>
