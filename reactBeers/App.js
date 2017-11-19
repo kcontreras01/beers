@@ -212,7 +212,10 @@ class SearchScreen extends React.Component {
       console.log('got beersData')
       return this.state.results.beersData.map((x, i)=>{
         console.log("x:", x);
-        return <Text key={i}>{x.name}</Text>
+        return (<View key={i}>
+          <Text>{x.name}</Text>
+          <Text>{x.description}</Text>
+        </View>)
       });
     } else {
       console.log('no beersData')
