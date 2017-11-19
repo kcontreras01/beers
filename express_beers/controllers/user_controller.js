@@ -1,4 +1,4 @@
-const User = require('../models/user'),
+const User = require('../models/users_model'),
       router = require('express').Router(),
       Auth = require('../services/auth');
 

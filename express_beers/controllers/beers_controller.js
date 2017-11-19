@@ -6,12 +6,16 @@ const Beers = require('../models/beers_model');
 router.post('/search',
     Beers.search,
     (req, res) => {
+    		console.log('---------------------------------------------')
+    		console.log('in beers post /search');
         const { beersData } = res.locals;
+        console.log('beersData:', beersData);
         res.json({ "beersData": beersData });
     });
 
 router.get('/', Beers.findAll, 
 	(req, res) => {
+		console.log('in beers get /')
 		res.json({
 			beers: res.locals.allBeers
 		});
@@ -27,6 +31,7 @@ router.get('/:id', Beers.findById,
 
 router.post('/', Beers.create,
 	(req, res) => {
+		console.log('in beers post /')
 		res.json({
 			beers: res.locals.newBeer
 		});

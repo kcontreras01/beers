@@ -57,7 +57,6 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.logo}>I Like Beer</Text>
         <Text>An app to keep track of the beers you've tried.</Text>
-
         <Text>Email</Text>
         <TextInput
           style={{
@@ -92,7 +91,6 @@ class HomeScreen extends React.Component {
     );
   }
 }
-
 export class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -101,7 +99,6 @@ export class SignUp extends React.Component {
   static navigationOptions = {
     title: "Sign Up Here"
   };
-
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -111,7 +108,6 @@ export class SignUp extends React.Component {
     );
   }
 }
-
 //User profile screen
 class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -124,13 +120,11 @@ class ProfileScreen extends React.Component {
     return (
       <View>
         <Text style={styles.header}>Here are your saved beers</Text>
-
         <Button onPress={() => navigate("Search")} title="Search" />
       </View>
     );
   }
 }
-
 // User profile screen
 class SearchScreen extends React.Component {
   constructor(props) {
@@ -141,20 +135,16 @@ class SearchScreen extends React.Component {
       saved: [],
       results: []
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderResults = this.renderResults.bind(this);
   }
-
   static navigationOptions = {
     title: "Find A Beer"
   };
-
   componentDidMount() {
     this.fetchData();
   }
-
   fetchData() {
     let url = "https://morning-oasis-96903.herokuapp.com/beers";
     fetch(url)
@@ -169,14 +159,12 @@ class SearchScreen extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
   handleChange(text) {
     // console.log("in handleChange. text:", text);
     this.setState({
       search: text
     });
   }
-
   onSubmit(e) {
     console.log("In onSubmit.");
     // console.log("------------------------------------");
@@ -216,23 +204,21 @@ class SearchScreen extends React.Component {
       });
     // console.log("the state in onSubmit is", this.state.results);
   }
-
   renderResults() {
     console.log("in renderResults.");
     console.log('this.state.results.beersData:', this.state.results.beersData);
     console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
     if (this.state.results.beersData) { 
       console.log('got beersData')
-      return this.state.results.beersData.map((x)=>{
+      return this.state.results.beersData.map((x, i)=>{
         console.log("x:", x);
-        return <Text>{x.name}</Text>
+        return <Text key={i}>{x.name}</Text>
       });
     } else {
       console.log('no beersData')
       return null;
     }
   }
-
   render() {
     console.log("------------------------------------");
     console.log("In render.");
@@ -263,10 +249,34 @@ class SearchScreen extends React.Component {
     );
   }
 }
-
 const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
   Search: { screen: SearchScreen },
   SignUp: { screen: SignUp }
 });
+// import React from "react";
+// import {
+//   FormLabel,
+//   FormInput
+// } from "react-native";
+// import { StackNavigator } from "react-navigation";
+// import {
+//   HomeScreen,
+//   ProfileScreen,
+//   SearchScreen,
+//   SignUp
+// } from "./components";
+
+// export default class App extends React.Component {
+//   render() {
+//     return <SimpleApp />;
+//   }
+// }
+
+// const SimpleApp = StackNavigator({
+//   Home: { screen: HomeScreen },
+//   Profile: { screen: ProfileScreen },
+//   Search: { screen: SearchScreen },
+//   SignUp: { screen: SignUp }
+// });

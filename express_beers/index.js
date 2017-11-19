@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
 // Hook up controllers yourself.
 app.use('/beers', require('./controllers/beers_controller'));
 // app.use('/users', require('./controllers/user_controller'));
+// app.use('/sessions', require('./controllers/sessions_controller'));
 
 // start the app.
 app.listen(PORT, () => {

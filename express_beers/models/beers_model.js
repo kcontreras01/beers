@@ -7,11 +7,14 @@ const Beers = {};
 
 Beers.search = (req, res, next) => {
         const { search } = req.body;
-        console.log("THIS IS THE SEARCH", search)
+        console.log("THIS IS THE SEARCH", search);
+        console.log("THIS IS THE BODY", req.body);
         const beersData = [];
-    		axios.get(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
+        const url = `http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`
+        console.log('url:', url);
+    		axios.get(url)
             .then(beerData => {
-                console.log('beersData is ', beerData.data);
+                console.log('beersData is ', beerData);
                 beerData.data.data.forEach(beer => {
                     let id = beer.id;
                     let name = beer.name;
