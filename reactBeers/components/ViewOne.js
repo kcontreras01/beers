@@ -1,8 +1,18 @@
-// import React from 'react';
-// import { Text, View , Button, StyleSheet } from 'react-native';
+import React from 'react';
+import { Text, View , Button, StyleSheet } from 'react-native';
 
-// class ViewOne extends React.Components {
+class ViewOne extends React.Component {
+	  static navigationOptions = {
+    title: 'Profile'
+  };
 
-// }
+	render(){
+		return(
+			<View>
+			<Text>View One page</Text>
+			</View>
+			)
+	}
+}
 
-// export { ViewOne }
+export { ViewOne }

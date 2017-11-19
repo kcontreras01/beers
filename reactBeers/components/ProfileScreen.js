@@ -1,5 +1,8 @@
 import React from 'react';
-import { Text, View , Button, StyleSheet, ScrollView } from 'react-native';
+import { Text, View , Button, StyleSheet, ScrollView, ListView } from 'react-native';
+// import Swipeout from 'react-native-swipeout';
+// import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
+ 
 
 class ProfileScreen extends React.Component {
   constructor(props){
@@ -7,13 +10,12 @@ class ProfileScreen extends React.Component {
     this.state = {
       saved: []
     }
-        this.renderResults = this.renderResults.bind(this);
+    this.renderResults = this.renderResults.bind(this);
 
   }
 
   static navigationOptions = {
-    title: 'My Profile'
-    // title: `${navigation.state.params.user}'s Profile`
+    title: 'Profile'
   };
 
   componentDidMount() {
@@ -24,30 +26,24 @@ class ProfileScreen extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(responseData => {
-        // console.log("in fetchData callback. responseData:", responseData);
         this.setState({
-          // console.log(responseData.results)
           saved: responseData
         });
-        // console.log("the state in fetch is", this.state.saved)
       })
       .catch(err => console.log(err));
   }
   renderResults() {
-    // console.log("in renderResults.");
-    // console.log('this.state.results.beersData:', this.state.results.beersData);
-    // console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;
+
     if (this.state.saved.beers) { 
-      // console.log('got beersData')
       return this.state.saved.beers.map((x, i)=>{
-        // console.log("x:", x);
         return (<View style={styles.beerView} key={i}>
-          <Text style={styles.titleText}>{x.name}</Text>
-          <Text style={styles.baseText}>{x.description}</Text>
+          <Text  onPress={() => navigate('ViewOne')} style={styles.titleText}>Name: {x.name}</Text>
+          <Text style={styles.baseText}>Description: {x.description}</Text>
         </View>)
       });
     } else {
-      // console.log('no beersData')
       return null;
     }
   }
@@ -57,23 +53,25 @@ class ProfileScreen extends React.Component {
     const { params } = this.props.navigation.state;
 
     return(
+
       <View>
-        <Text style={styles.header}>Here are your saved beers</Text>
-
-
       <Button
         onPress={() => navigate('Search')}
-        title="Search"
+        title="Search for Beers"
         />
+      
+      <Text style={styles.headerView}>Here are your saved beers</Text>
 
       <ScrollView>
         {this.renderResults()}
       </ScrollView>
+    <Text>Swipe me left</Text>
 
       </View>
       )
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +79,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  headerView: {
+    textAlign: 'center',
+    fontFamily: 'Cochin',
+    fontSize: 20
   },
   logo: {
     fontSize: 30

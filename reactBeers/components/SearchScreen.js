@@ -8,8 +8,7 @@ import {
   TextInput,
   FormLabel,
   FormInput,
-  ScrollView
-} from "react-native";
+  ScrollView} from "react-native";
 import { StackNavigator } from "react-navigation";
 
 class SearchScreen extends React.Component {
@@ -110,6 +109,10 @@ class SearchScreen extends React.Component {
     }
   }
 
+
+// Swipeout component
+
+
   // save(x){
   //   axios.post('https://morning-oasis-96903.herokuapp.com/beers/', {
   //       user_id: this.props.user.id,
@@ -121,29 +124,27 @@ class SearchScreen extends React.Component {
   //     })
   //   };
 
+
   render() {
     // console.log("------------------------------------");
     // console.log("In render.");
+
     return (
       <View>
-        <Text>Search</Text>
         <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            borderRadius: 8,
-            width: 300,
-            backgroundColor: "white"
-          }}
+          style={styles.textInputView}
           blurOnSubmit={true}
           onChangeText={this.handleChange}
+          placeholder={'Search'}
         />
-        <Button onPress={this.onSubmit} title="Submit" />
+        <Button onPress={this.onSubmit} title="Submit"
+        />
         <ScrollView>
         {this.renderResults()}
         </ScrollView>
+
       </View>
+
     );
   }
 }
@@ -154,6 +155,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  headerView: {
+    textAlign: 'center',
+    fontFamily: 'Cochin',
+    fontSize: 20
   },
   logo: {
     fontSize: 30
@@ -170,6 +176,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     margin: 10,
     padding: 10,
+  },
+  textInputView: {
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+    borderRadius: 8,
+    // width: 300,
+    backgroundColor: "white",
+    textAlign: 'center',
+    margin: 20
   }
 });
 

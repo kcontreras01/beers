@@ -30,7 +30,7 @@ export class SignUp extends React.Component {
     const { navigate } = this.props.navigation;
     const { first_name, last_name, email, password, password_confirmation } = this.state;
 
-    console.log('the state is', this.state)
+    // console.log('the state is', this.state)
     fetch('https://morning-oasis-96903.herokuapp.com/users', {
       method: 'POST',
       data: { first_name, last_name, email, password, password_confirmation },

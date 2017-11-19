@@ -15,7 +15,8 @@ import {
   HomeScreen,
   ProfileScreen,
   SearchScreen,
-  SignUp
+  SignUp,
+  ViewOne
 } from "./components";
 
 export default class App extends React.Component {
@@ -53,5 +54,6 @@ const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
   Profile: { screen: ProfileScreen },
   Search: { screen: SearchScreen },
-  SignUp: { screen: SignUp }
+  SignUp: { screen: SignUp },
+  ViewOne: {screen: ViewOne }
 });
