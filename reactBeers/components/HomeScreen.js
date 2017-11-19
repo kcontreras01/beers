@@ -6,8 +6,8 @@ import { setUser } from '../library/utilities'
 // Landing Page
 class HomeScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { email: '', password: '' };
   }
 
@@ -15,21 +15,34 @@ class HomeScreen extends React.Component {
     title: 'Welcome'
   };
 
-  login(){
-    const { email, password } = this.state;
-    const { navigate } = this.props.navigation;
-
-    axios.post('https://morning-oasis-96903.herokuapp.com/sessions', {email, password})
-        .then(user => {
-          console.log(response);
-          setUser(user).then(() => {
-            navigate('Profile');
-          });
-        })
-        .catch(err=>{
-          console.log(err);
-        });
+    // method to log in
+  login(e){
+    e.preventDefault(); // prevent default form action
+    // send request to make sure the email and password are correct
+    axios.post(`${this.props.url}/login`, this.state.inputs)
+      .then(res => { // set the user based off of the response
+        this.props.setUser(res.data)
+      .then(() => {
+        navigate('Profile')
+      })
+      })
   }
+
+  // login(){
+  //   const { email, password } = this.state;
+  //   const { navigate } = this.props.navigation;
+
+  //   axios.post('https://morning-oasis-96903.herokuapp.com/sessions', {email, password})
+  //       .then(user => {
+  //         console.log(response);
+  //         setUser(user).then(() => {
+  //           navigate('Profile');
+  //         });
+  //       })
+  //       .catch(err=>{
+  //         console.log(err);
+  //       });
+  // }
 
   render() {
     const { navigate } = this.props.navigation;

@@ -24,6 +24,7 @@ class SearchScreen extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.renderResults = this.renderResults.bind(this);
+    // this.save = this.save.bind(this);
   }
   static navigationOptions = {
     title: "Find A Beer"
@@ -108,6 +109,18 @@ class SearchScreen extends React.Component {
       return null;
     }
   }
+
+  // save(x){
+  //   axios.post('https://morning-oasis-96903.herokuapp.com/beers/', {
+  //       user_id: this.props.user.id,
+  //       name: x.name,
+  //       description: x.description,
+  //     }).then(res => {
+  //       console.log(res);
+  //       this.props.goBack();
+  //     })
+  //   };
+
   render() {
     // console.log("------------------------------------");
     // console.log("In render.");
@@ -161,69 +174,3 @@ const styles = StyleSheet.create({
 });
 
 export {SearchScreen}
-
-// //     componentDidMount() {
-// //     const {search} = this.state.search;
-// //     const { url } = 
-// //     return fetch(`http://api.brewerydb.com/v2/search?q=${search}&key=${API_KEY}`)
-// //       .then((response) => response.json())
-// //       .then((responseJson) => {
-// //         this.setState({
-// //           results: responseJson.results
-// //         }, function() {
-// //           console.log('Beers', this.state.results)
-// //           // do something with new state
-// //         });
-// //       })
-// //       .catch((error) => {
-// //         console.error(error);
-// //       });
-// //     };
-
-
-// //   handleChange(event) {
-// //     event.preventDefault();
-// //     this.setState({
-// //       value: event.target.value
-// //     });
-// //   }
-
-// //   onClick(event) {
-// //     event.preventDefault();
-// //     this.setState({
-// //       displayForm: true,
-// //       displayResults: false,
-// //       value: ""
-// //     });
-// //   }
-
-// //   onSubmit(event) {
-// //     event.preventDefault();
-// //     this.setState({
-// //       displayForm: false,
-// //       displayResults: true
-// //     });
-// //   }
-
-// //   render(){
-// //     console.log("Beers:", this.state.beers)
-// //     return(
-// //       <View>
-
-// //         <FormLabel style={styles.header}>Search Here</FormLabel>
-// //         <FormInput
-// //         style={{height: 40, borderColor: 'gray', borderWidth: 1, borderRadius: 8, width: 300, backgroundColor:'white'}}
-// //         onChangeText={this.handleChange}
-// //         value={this.state.value}
-// //         />
-
-// //         <Button
-// //         onPress={this.onSubmit}
-// //         title="Sumbit"
-// //         />
-
-// //       </View>
-// //       )
-// //   }
-// // }
-
