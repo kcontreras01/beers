@@ -7,7 +7,8 @@ import {
   Button,
   TextInput,
   FormLabel,
-  FormInput
+  FormInput,
+  ScrollView
 } from "react-native";
 import { StackNavigator } from "react-navigation";
 
@@ -39,6 +40,19 @@ const styles = StyleSheet.create({
   },
   logo: {
     fontSize: 30
+  },
+  baseText: {
+    fontFamily: 'Cochin',
+  },
+  titleText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  beerView: {
+    backgroundColor: 'lightblue',
+    borderRadius: 8,
+    margin: 10,
+    padding: 10,
   }
 });
 
@@ -57,7 +71,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.logo}>I Like Beer</Text>
         <Text>An app to keep track of the beers you've tried.</Text>
-        <Text>Email</Text>
+        <Text style={styles.titleText}>Email</Text>
         <TextInput
           style={{
             height: 40,
@@ -71,7 +85,7 @@ class HomeScreen extends React.Component {
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
-        <Text>Password</Text>
+        <Text style={styles.titleText}>Password</Text>
         <TextInput
           style={{
             height: 40,
@@ -166,19 +180,19 @@ class SearchScreen extends React.Component {
     });
   }
   onSubmit(e) {
-    console.log("In onSubmit.");
+    // console.log("In onSubmit.");
     // console.log("------------------------------------");
     // console.log("In onSubmit. e.constructor:", e.constructor);
     e.preventDefault();
     e.stopPropagation();
     // console.log("made it here!");
-    console.log("this.state.search:", this.state.search);
+    // console.log("this.state.search:", this.state.search);
     let url = "https://morning-oasis-96903.herokuapp.com/beers/search",
       body = JSON.stringify({
         search: this.state.search
       });
-    console.log("made it here");
-    console.log("body:", body);
+    // console.log("made it here");
+    // console.log("body:", body);
     fetch(url, {
       method: "POST",
       headers: {
@@ -188,13 +202,13 @@ class SearchScreen extends React.Component {
       body: body
     })
       .then(response => {
-        console.log("in .then of fetch in onSubmit");
-        console.log("response:", response);
+        // console.log("in .then of fetch in onSubmit");
+        // console.log("response:", response);
         return response.json();
       })
       .then(responseData => {
-        console.log("got a response");
-        console.log("response:", responseData);
+        // console.log("got a response");
+        // console.log("response:", responseData);
         this.setState({
           results: responseData
         });
@@ -205,26 +219,26 @@ class SearchScreen extends React.Component {
     // console.log("the state in onSubmit is", this.state.results);
   }
   renderResults() {
-    console.log("in renderResults.");
-    console.log('this.state.results.beersData:', this.state.results.beersData);
-    console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
+    // console.log("in renderResults.");
+    // console.log('this.state.results.beersData:', this.state.results.beersData);
+    // console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
     if (this.state.results.beersData) { 
-      console.log('got beersData')
+      // console.log('got beersData')
       return this.state.results.beersData.map((x, i)=>{
-        console.log("x:", x);
-        return (<View key={i}>
-          <Text>{x.name}</Text>
-          <Text>{x.description}</Text>
+        // console.log("x:", x);
+        return (<View style={styles.beerView} key={i}>
+          <Text style={styles.titleText}>{x.name}</Text>
+          <Text style={styles.baseText}>{x.description}</Text>
         </View>)
       });
     } else {
-      console.log('no beersData')
+      // console.log('no beersData')
       return null;
     }
   }
   render() {
-    console.log("------------------------------------");
-    console.log("In render.");
+    // console.log("------------------------------------");
+    // console.log("In render.");
     return (
       <View>
         <Text>Search</Text>
@@ -240,14 +254,10 @@ class SearchScreen extends React.Component {
           blurOnSubmit={true}
           onChangeText={this.handleChange}
         />
-        <Button
-          onPress={() => {
-            console.log("in onPress of Stupid Button");
-          }}
-          title="Stupid Button"
-        />
-        <Button onPress={this.onSubmit} title="Consider Submitting" />
+        <Button onPress={this.onSubmit} title="Submit" />
+        <ScrollView>
         {this.renderResults()}
+        </ScrollView>
       </View>
     );
   }
