@@ -30,15 +30,19 @@ export class SignUp extends React.Component {
     const { navigate } = this.props.navigation;
     const { first_name, last_name, email, password, password_confirmation } = this.state;
 
-    // console.log('the state is', this.state)
+    console.log('the state is', this.state)
     fetch('https://morning-oasis-96903.herokuapp.com/users', {
       method: 'POST',
-      data: { first_name, last_name, email, password, password_confirmation },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ first_name, last_name, email, password, password_confirmation }),
     })
 
         .then(user => {
           //if successful set the user and then navigate to profile because we are logged in
-          console.log(user);
+          // console.log(user);
           setUser(user).then(() => {
             navigate('Profile');
           });

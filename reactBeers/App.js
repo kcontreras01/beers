@@ -16,8 +16,10 @@ import {
   ProfileScreen,
   SearchScreen,
   SignUp,
-  ViewOne
+  ViewOne,
+  AddOne
 } from "./components";
+// Expo.Font.loadAsync('Cabin Sketch', 'https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
 export default class App extends React.Component {
   render() {
@@ -55,5 +57,7 @@ const SimpleApp = StackNavigator({
   Profile: { screen: ProfileScreen },
   Search: { screen: SearchScreen },
   SignUp: { screen: SignUp },
-  ViewOne: {screen: ViewOne }
+  ViewOne: {screen: ViewOne },
+  AddOne: {screen: AddOne }
+
 });

@@ -10,6 +10,7 @@ import {
   FormInput,
   ScrollView} from "react-native";
 import { StackNavigator } from "react-navigation";
+import axios from 'axios';
 
 class SearchScreen extends React.Component {
   constructor(props) {
@@ -91,6 +92,8 @@ class SearchScreen extends React.Component {
     // console.log("the state in onSubmit is", this.state.results);
   }
   renderResults() {
+    const { navigate } = this.props.navigation;
+    const { params } = this.props.navigation.state;    
     // console.log("in renderResults.");
     // console.log('this.state.results.beersData:', this.state.results.beersData);
     // console.log('Array.isArray(this.state.results.beersData):', Array.isArray(this.state.results.beersData));
@@ -99,7 +102,21 @@ class SearchScreen extends React.Component {
       return this.state.results.beersData.map((x, i)=>{
         // console.log("x:", x);
         return (<View style={styles.beerView} key={i}>
-          <Text style={styles.titleText}>{x.name}</Text>
+         <Text onPress={() => {
+            // console.log("In SearchScreen renderResults, about to send axios post");
+            axios.post(`https://morning-oasis-96903.herokuapp.com/beers/`, {
+              name: x.name,
+              description: x.description,
+            }).then(function (response) {
+              // console.log("in SearchScreen renderResults onPress callback response. response:",response);
+              navigate('Profile')
+              })
+            .catch(function (error) {
+              console.log(error);
+              });
+            }
+          }  
+          style={styles.titleText}>{x.name}</Text>
           <Text style={styles.baseText}>{x.description}</Text>
         </View>)
       });
@@ -108,6 +125,8 @@ class SearchScreen extends React.Component {
       return null;
     }
   }
+
+// redirect to profile screen 
 
 
 // Swipeout component
