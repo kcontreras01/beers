@@ -3,41 +3,42 @@ import {
   Text,
   View,
   TextInput,
-  Button
+  Button,
+  StyleSheet
 } from "react-native";
 import axios from 'axios';
 import { setUser } from "../library/utilities";
+import { FormLabel, FormInput } from 'react-native-elements'
 
 export class SignUp extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      first_name: '',
-      last_name: '',
+      name: '',
       email: "",
       password: "",
       password_confirmation:''
     };
   }
 
-  static navigationOptions = {
-    title: "Sign Up Here"
-  };
+    static navigationOptions = {
+    header: null
+  }
 
   signUp(){
 
     const { navigate } = this.props.navigation;
-    const { first_name, last_name, email, password, password_confirmation } = this.state;
+    const { name, email, password, password_confirmation } = this.state;
 
-    console.log('the state is', this.state)
+    // console.log('the state is', this.state)
     fetch('https://morning-oasis-96903.herokuapp.com/users', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ first_name, last_name, email, password, password_confirmation }),
+      body: JSON.stringify({ name, email, password, password_confirmation }),
     })
 
         .then(user => {
@@ -57,83 +58,82 @@ export class SignUp extends React.Component {
     const { textInputStyle, logo, container } = styles;
 
     return (
-      <View style={container}>
+      <View style={styles.container}>
         <Text style={logo}>I Like Beer</Text>
 
-        <Text>First Name</Text>
+        <Text>Name</Text>
         <TextInput
-            style={textInputStyle}
+            // style={textInputStyle}
             blurOnSubmit={true}
-            onChangeText={(first_name) => this.setState({first_name})}
-            value={this.state.first_name}
+            onChangeText={(name) => this.setState({name})}
+            value={this.state.name}
             placeholder={'John'}
-        />
-
-        <Text>Last Name</Text>
-        <TextInput
-            style={textInputStyle}
-            blurOnSubmit={true}
-            onChangeText={(last_name) => this.setState({last_name})}
-            value={this.state.last_name}
-            placeholder={'Smith'}
+            style={styles.textInputStyle}
         />
 
         <Text>Email</Text>
         <TextInput
-            style={textInputStyle}
+            // style={textInputStyle}
             blurOnSubmit={true}
             onChangeText={(email) => this.setState({email})}
             value={this.state.email}
             placeholder={'JohnSmith@example.com'}
+            style={styles.textInputStyle}
         />
 
         <Text>Password</Text>
         <TextInput
-            style={textInputStyle}
+            // style={textInputStyle}
             blurOnSubmit={true}
             onChangeText={(password) => this.setState({password})}
             value={this.state.password}
             placeholder={'********'}
+            style={styles.textInputStyle}
         />
 
         <Text>Confirm Password</Text>
         <TextInput
-            style={textInputStyle}
+            // style={textInputStyle}
             blurOnSubmit={true}
             onChangeText={(password_confirmation) => this.setState({password_confirmation})}
             value={this.state.password_confirmation}
             placeholder={'********'}
+            style={styles.textInputStyle}
         />
 
         <Button
             onPress={this.signUp.bind(this)}
-            title="Sign Up"
+            title="Confirm"
         />
 
         <Button
             onPress={() => navigate('Home')}
-            title="Login"
+            title="Return to Login"
         />
       </View>
       )
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFCEB",
     alignItems: "center",
+    paddingTop: 40
   },
   logo: {
-    fontSize: 30
+    fontSize: 30,
+    color: '#E64017',
+    fontFamily: 'Futura-CondensedMedium',
+    // fontFamily: 'Cabin Sketch'
   },
   textInputStyle:{
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        borderRadius: 8,
-        width: 300,
-        backgroundColor:'white'
-      }
-};
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    width: 300,
+    backgroundColor:'white'
+  }
+});

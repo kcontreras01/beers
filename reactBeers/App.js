@@ -30,12 +30,24 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFCEB",
     alignItems: "center",
-    justifyContent: "center"
+    paddingTop: 50
   },
   logo: {
-    fontSize: 30
+    fontSize: 70,
+    color: '#E64017',
+    fontFamily: 'Futura-CondensedMedium',
+    padding: 20
+    // fontFamily: 'Cabin Sketch'
+  },
+  textInputStyle:{
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 8,
+    width: 300,
+    backgroundColor:'white'
   },
   baseText: {
     fontFamily: 'Cochin',

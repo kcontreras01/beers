@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View , Button, TextInput, StyleSheet} from 'react-native';
 import axios from 'axios';
 import { setUser } from '../library/utilities'
+import { FormLabel, FormInput } from 'react-native-elements'
 
 // Landing Page
 class HomeScreen extends React.Component {
@@ -9,6 +10,10 @@ class HomeScreen extends React.Component {
   constructor() {
     super();
     this.state = { email: '', password: '' };
+  }
+
+    static navigationOptions = {
+    header: null
   }
 
   // static navigationOptions = {
@@ -34,7 +39,7 @@ class HomeScreen extends React.Component {
 
     axios.post('https://morning-oasis-96903.herokuapp.com/sessions', {email, password})
         .then(user => {
-          console.log(response);
+          // console.log(response);
           setUser(user).then(() => {
             navigate('Profile');
           });
@@ -51,20 +56,20 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>I Like Beer</Text>
-        <Text>An app to keep track of the beers you've tried.</Text>
+        <Text>An app to keep track of the beers you've tried and loved.</Text>
 
-        <Text>Email</Text>
-        <TextInput
-        style={textInputStyle}
+        <FormLabel>Email</FormLabel>
+        <FormInput
+        // style={textInputStyle}
         blurOnSubmit={true}
         onChangeText={(email) => this.setState({email})}
         value={this.state.email}
         placeholder={'JohnSmith@example.com'}
         />
 
-        <Text>Password</Text>
-        <TextInput
-        style={textInputStyle}
+        <FormLabel>Password</FormLabel>
+        <FormInput
+        // style={textInputStyle}
         blurOnSubmit={true}
         onChangeText={(password) => this.setState({password})}
         value={this.state.password}
@@ -89,12 +94,15 @@ class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#71EDE2",
+    backgroundColor: "#FFFCEB",
     alignItems: "center",
+    paddingTop: 50
   },
   logo: {
-    fontSize: 30,
-    color: '#D84C34',
+    fontSize: 70,
+    color: '#E64017',
+    fontFamily: 'Futura-CondensedMedium',
+    padding: 20
     // fontFamily: 'Cabin Sketch'
   },
   textInputStyle:{

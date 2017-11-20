@@ -107,10 +107,11 @@ class SearchScreen extends React.Component {
             axios.post(`https://morning-oasis-96903.herokuapp.com/beers/`, {
               name: x.name,
               description: x.description,
-            }).then(function (response) {
-              // console.log("in SearchScreen renderResults onPress callback response. response:",response);
-              navigate('Profile')
-              })
+            })
+            // .then(function (response) {
+            //   // console.log("in SearchScreen renderResults onPress callback response. response:",response);
+            //   navigate('Profile')
+            //   })
             .catch(function (error) {
               console.log(error);
               });
@@ -149,7 +150,7 @@ class SearchScreen extends React.Component {
     // console.log("In render.");
 
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           style={styles.textInputView}
           blurOnSubmit={true}
@@ -171,41 +172,47 @@ class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFCEB",
     alignItems: "center",
-    justifyContent: "center"
-  },
-  headerView: {
-    textAlign: 'center',
-    fontFamily: 'Cochin',
-    fontSize: 20
+    // paddingTop: 40,
   },
   logo: {
-    fontSize: 30
-  },
-  baseText: {
-    fontFamily: 'Cochin',
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 30,
+    color: '#E64017',
+    fontFamily: 'Futura-CondensedMedium',
+    // fontFamily: 'Cabin Sketch'
   },
   beerView: {
-    backgroundColor: 'lightblue',
     borderRadius: 8,
+    backgroundColor: '#A5D0A8',
     margin: 10,
-    padding: 10,
+    padding: 10
+  },
+  baseText: {
+    fontFamily: 'Futura-CondensedMedium',
+    fontSize: 15    
+        
+  },
+  headerView: {
+    textAlign: "center",
+    fontFamily: 'Futura-CondensedMedium',
+    fontSize: 30,
+    padding: 10
+  },  
+  titleText: {
+    fontSize: 20,
+    fontFamily: 'Futura-CondensedMedium',
   },
   textInputView: {
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
     borderRadius: 8,
-    // width: 300,
+    width: 300,
     backgroundColor: "white",
     textAlign: 'center',
     margin: 20
-  }
+  }  
 });
 
 export {SearchScreen}
