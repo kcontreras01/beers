@@ -23,6 +23,8 @@ class ProfileScreen extends React.Component {
       refreshing: false
           };
     this.renderResults = this.renderResults.bind(this); 
+    this._onRefresh = this._onRefresh.bind(this); 
+
   }
 
   static navigationOptions = {
@@ -53,12 +55,10 @@ class ProfileScreen extends React.Component {
       return this.state.saved.beers.map((x, i)=>{
         return (<View style={styles.beerView} key={i}>
 
-
-
           <Text  
           onPress={() => 
             axios.delete(`https://morning-oasis-96903.herokuapp.com/beers/${x.id}`)
-            .then(() => {navigate('Profile')})
+            // .then(() => {navigate('Profile')})
           } 
           style={styles.titleText}>Name: {x.name}</Text>
           <Text style={styles.baseText}>Description: {x.description}</Text>
@@ -70,10 +70,7 @@ class ProfileScreen extends React.Component {
   }
 
   _onRefresh(){
-    this.setState({refreshing: true});
-    fetchData().then(() =>{
-      this.setState({refreshing: false});
-    })
+    this.fetchData()
   }
 
   render(){
@@ -95,7 +92,7 @@ class ProfileScreen extends React.Component {
         refreshControl ={
           <RefreshControl
             refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
+            onRefresh={this._onRefresh}
           />
         }>
         {this.renderResults()}
