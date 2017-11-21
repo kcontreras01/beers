@@ -29,6 +29,8 @@ class SearchScreen extends React.Component {
   static navigationOptions = {
     title: "Find A Beer"
   };
+
+
   componentDidMount() {
     this.fetchData();
   }
@@ -149,6 +151,7 @@ class SearchScreen extends React.Component {
     // console.log("------------------------------------");
     // console.log("In render.");
 
+
     return (
       <View style={styles.container}>
         <TextInput
@@ -168,6 +171,8 @@ class SearchScreen extends React.Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -61,7 +61,7 @@ class ProfileScreen extends React.Component {
             // .then(() => {navigate('Profile')})
           } 
           style={styles.titleText}>Name: {x.name}</Text>
-          <Text style={styles.baseText}>Description: {x.description}</Text>
+          <Text style={styles.baseText}>{x.description}</Text>
         </View>);
       });
     } else {
