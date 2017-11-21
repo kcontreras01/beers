@@ -19,14 +19,10 @@ Beers.search = (req, res, next) => {
                     let id = beer.id;
                     let name = beer.name;
                     let description = beer.description;
-                    let website = beer.website;
-                    let images = beer.images;
                     beersData.push({
                         id: id,
                         name: name,
                         description: description,
-                        website: website,
-                        images: images,
                     }) //end of push
                 }) //end of forEach
                 res.locals.beersData = beersData;
@@ -59,10 +55,10 @@ Beers.findById = (req, res, next) => {
 };
 
 Beers.create = (req, res, next) => {
-	const { name, description, image } = req.body;
+	const { name, description} = req.body;
 	db.one(`INSERT INTO beers
-		(name, description, image) VALUES
-		($1, $2, $3) RETURNING *`, [name, description, image])
+		(name, description) VALUES
+		($1, $2) RETURNING *`, [name, description])
 	.then((newBeer) => {
 		res.locals.newBeer = newBeer;
 		next();
@@ -73,12 +69,12 @@ Beers.create = (req, res, next) => {
 };
 
 Beers.update = (req, res, next) => {
-	const { name, description, image } = req.body;
+	const { name, description } = req.body;
 	const { id } = req.params;
 	db.oneOrNone(`UPDATE beers SET
-		name=$1, description=$2, image=$3
-		WHERE id=$4 RETURNING *`,
-		[name, description, image, id])
+		name=$1, description=$2
+		WHERE id=$3 RETURNING *`,
+		[name, description, id])
 	.then(edit => {
 		res.locals.edit = edit;
 		next();

@@ -2,22 +2,20 @@ DROP TABLE IF EXISTS beers;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
+  id BIGSERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL,
   email VARCHAR NOT NULL UNIQUE,
   password_digest VARCHAR NOT NULL,
-  thread_id VARCHAR NOT NULL
+  token VARCHAR NOT NULL
 );
 
 CREATE TABLE beers (
   id SERIAL PRIMARY KEY,
   name VARCHAR,
-  description VARCHAR,
-  images VARCHAR,
-  website VARCHAR,
-  user_id INT REFERENCES users (id)
+  description VARCHAR, user_id INT REFERENCES users (id)
 );
 
-INSERT INTO beers (name, description, website, images) VALUES ('kiara', 'hot chili',  'website','https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, website, images) VALUES ('leo', 'smol boi', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, website, images) VALUES ('becca', 'gin', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
-INSERT INTO beers (name, description, website, images) VALUES ('jon', 'pork', 'website', 'https://www.mrbeer.com/media/catalog/product/Beer-Pale-MugLOW.jpg');
+INSERT INTO beers (name, description) VALUES ('kiara', 'hot chili');
+INSERT INTO beers (name, description) VALUES ('leo', 'smol boi');
+INSERT INTO beers (name, description) VALUES ('becca', 'gin');
+INSERT INTO beers (name, description) VALUES ('jon', 'pork');

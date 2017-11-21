@@ -31,6 +31,7 @@ router.get('/:id', Beers.findById,
 
 router.post('/', Beers.create,
 	(req, res) => {
+		console.log('---------------------------------------------')
 		console.log('in beers post /')
 		res.json({
 			beers: res.locals.newBeer

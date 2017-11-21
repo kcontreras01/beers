@@ -8,8 +8,7 @@ const User = require('../models/users_model'),
 // We use the Auth.restrict to restrict it to only calls using the auth_token
 router.get('/validate', Auth.restrict, (req, res)=>{
   res.json({
-    first_name: req.user.first_name,
-    last_name: req.user.last_name,
+    name: req.user.name,
     email: req.user.email,
     token: req.user.token,
     id: req.user.id
@@ -17,21 +16,20 @@ router.get('/validate', Auth.restrict, (req, res)=>{
 })
 
 router.post('/', (req, res) => {
-
+  console.log("in POST the req.body is:", req.body)
   const email = req.body.email.toLowerCase();
   // this is an easier way of doing:
   // const name = req.body.name,
   //       password = req.body.password,
   //       password_confirmation = req.body.password_confirmation;
-  const {first_name, last_name, password, password_confirmation} = req.body;
+  const {name, password, password_confirmation} = req.body;
 
 
   //////////////////////////////////////////////////////
   // We are going to validate our inputs!
   // creating an object to hold any errors we may find
   const errors = {
-    first_name: [],
-    last_name: [],
+    name: [],
     email: [],
     password: [],
     password_confirmation: []
@@ -45,7 +43,9 @@ router.post('/', (req, res) => {
   Object.keys(errors).forEach(key => {
     // If it does not have the field
     // the split and join is so we take out any spaces.
-    // this will make sure someone doesn't enter just spaces for one of the fields
+    // this wil make sure someone doesn't enter just spaces for one of the fields
+    console.log('key:', key);
+    console.log('req.body[key]:', req.body[key]);
     if(!req.body[key].split(' ').join('')){
       // add a message to the error object for that field
       // (the split and join here is so we can get rid of the _ in password_confirmation)
@@ -72,7 +72,7 @@ router.post('/', (req, res) => {
   // if there are no errors, create the user!
   if(!error){
     User
-      .generateToken(User.create, first_name, last_name, email, password)
+      .generateToken(User.create, name, email, password)
       .then(data => { // once we create the user
         res.json(data)
       })

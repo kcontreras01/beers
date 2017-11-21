@@ -5,10 +5,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
+const auth = require('./services/auth.js');
 const logger = require('morgan');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const Auth = require('./services/auth');
+
 
 
 app.use(cors());
@@ -26,7 +28,10 @@ app.use(session({
 // logger setup.
 app.use(logger('dev'));
 
-const auth = require('./services/auth.js');
+// before all routes, use the middleware we define in Auth to get the
+// current user
+app.use(Auth.authenticate);
+
 // app.use(auth.passportInstance);
 // app.use(auth.passportSession);
 app.use(cookieParser());
@@ -38,8 +43,8 @@ app.get('/', (req, res) => {
 
 // Hook up controllers yourself.
 app.use('/beers', require('./controllers/beers_controller'));
-// app.use('/users', require('./controllers/user_controller'));
-// app.use('/sessions', require('./controllers/sessions_controller'));
+app.use('/users', require('./controllers/user_controller'));
+app.use('/sessions', require('./controllers/sessions_controller'));
 
 // start the app.
 app.listen(PORT, () => {
