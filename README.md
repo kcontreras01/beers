@@ -32,8 +32,8 @@ This will start a development server for you, and print a QR code in your termin
 
 # Sketches of major views / interfaces in your application
 
-[IMG_2287.jpg]
-[IMG_2288.jpg]
+![img_2287](https://git.generalassemb.ly/storage/user/7636/files/67eda5f0-c8ad-11e7-98c2-4b6b56982b83)
+![img_2288](https://git.generalassemb.ly/storage/user/7636/files/6973611c-c8ad-11e7-94f8-c446afba5ec7)
 
 # Descriptions of any unsolved problems or major hurdles you had to overcome
 ## Major hurtles included React Native itself. Changing the tags wasn't an issue but it had multiple bugs that I had to get around by researching. Some issues were resolved with console.logs and heroku logs
