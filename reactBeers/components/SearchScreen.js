@@ -4,12 +4,12 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   FormLabel,
   FormInput,
-  ScrollView} from "react-native";
-import { StackNavigator } from "react-navigation";
+  ScrollView,
+  Alert} from "react-native";
+import { Button } from 'react-native-elements';
 import axios from 'axios';
 
 class SearchScreen extends React.Component {
@@ -105,6 +105,7 @@ class SearchScreen extends React.Component {
         // console.log("x:", x);
         return (<View style={styles.beerView} key={i}>
          <Text onPress={() => {
+            Alert.alert('Your beer was saved!')
             // console.log("In SearchScreen renderResults, about to send axios post");
             axios.post(`https://morning-oasis-96903.herokuapp.com/beers/`, {
               name: x.name,
@@ -154,13 +155,19 @@ class SearchScreen extends React.Component {
 
     return (
       <View style={styles.container}>
+      <Text style={styles.text}>After searching, click on the name to save the beer.</Text>
         <TextInput
           style={styles.textInputView}
           blurOnSubmit={true}
           onChangeText={this.handleChange}
           placeholder={'Search'}
+          onSubmitEditing={this.onSubmit}
         />
-        <Button onPress={this.onSubmit} title="Submit"
+        <Button 
+          constainerViewStyle={{padding: 20, width: '100%'}}
+          icon={{name: 'check', type: 'font-awesome'}}
+          onPress={this.onSubmit} 
+          title="Submit"
         />
         <ScrollView>
         {this.renderResults()}
@@ -177,7 +184,7 @@ class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFCEB",
+    backgroundColor: "#2D3142",
     alignItems: "center",
     // paddingTop: 40,
   },
@@ -188,8 +195,8 @@ const styles = StyleSheet.create({
     // fontFamily: 'Cabin Sketch'
   },
   beerView: {
-    borderRadius: 8,
-    backgroundColor: '#A5D0A8',
+    borderRadius: 2,
+    backgroundColor: '#8693AB',
     margin: 10,
     padding: 10
   },
@@ -207,6 +214,14 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 20,
     fontFamily: 'Futura-CondensedMedium',
+    color: 'white'
+  },
+  text: {
+    fontSize: 27,
+    fontFamily: 'Futura-CondensedMedium',
+    paddingTop: 30,
+    color: 'white',
+    textAlign: 'center' 
   },
   textInputView: {
     height: 40,

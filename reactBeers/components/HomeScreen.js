@@ -16,23 +16,6 @@ class HomeScreen extends React.Component {
     header: null
   }
 
-  // static navigationOptions = {
-  //   title: 'Welcome'
-  // };
-
-  //   // method to log in
-  // login(e){
-  //   e.preventDefault(); // prevent default form action
-  //   // send request to make sure the email and password are correct
-  //   axios.post(`${this.props.url}/login`, this.state.inputs)
-  //     .then(res => { // set the user based off of the response
-  //       this.props.setUser(res.data)
-  //     .then(() => {
-  //       navigate('Profile')
-  //     })
-  //     })
-  // }
-
   login(){
     const { email, password } = this.state;
     const { navigate } = this.props.navigation;

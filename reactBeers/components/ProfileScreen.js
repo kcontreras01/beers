@@ -2,14 +2,14 @@ import React from "react";
 import {
   Text,
   View,
-  Button,
   StyleSheet,
   ScrollView,
   ListView,
   FlatList,
-  RefreshControl
+  RefreshControl,
+  Alert
 } from "react-native";
-import { List, ListItem } from "react-native-elements";
+import { List, ListItem, Header, Button, Icon} from "react-native-elements";
 import axios from 'axios';
 
 // import Swipeout from 'react-native-swipeout';
@@ -28,7 +28,7 @@ class ProfileScreen extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Profile"
+    title: "Saved Beers"
   };
 
 
@@ -56,11 +56,12 @@ class ProfileScreen extends React.Component {
         return (<View style={styles.beerView} key={i}>
 
           <Text  
-          onPress={() => 
+          onPress={() => {
+            Alert.alert('Your beer was deleted! Refresh page to view beers.'),
             axios.delete(`https://morning-oasis-96903.herokuapp.com/beers/${x.id}`)
             // .then(() => {navigate('Profile')})
-          } 
-          style={styles.titleText}>Name: {x.name}</Text>
+          } }
+          style={styles.titleText}>{x.name}</Text>
           <Text style={styles.baseText}>{x.description}</Text>
         </View>);
       });
@@ -80,21 +81,21 @@ class ProfileScreen extends React.Component {
 
     return(
       <View style={styles.container}>
-      <Button
-        onPress={() => navigate('Search')}
-        title="Search for Beers"
-        style={styles.searchButton}
+        <Button
+          onPress={() => navigate('Search')}
+          icon={{name: 'beer', type: 'font-awesome'}}
+          containerViewStyle={{width: '90%', padding: 20}}
+          textStyle={{textAlign: 'center'}}
+          title={`Search for Beers`}
         />
-      
-      <Text style={styles.headerView}>Here are your saved beers</Text>
-
-      <ScrollView
-        refreshControl ={
+     <ScrollView
+        refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
             onRefresh={this._onRefresh}
           />
         }>
+
         {this.renderResults()}
       </ScrollView>
         </View>
@@ -105,19 +106,17 @@ class ProfileScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFFCEB",
+    backgroundColor: "#2D3142",
     alignItems: "center",
-    // paddingTop: 40,
   },
   logo: {
     fontSize: 30,
     color: '#E64017',
     fontFamily: 'Futura-CondensedMedium',
-    // fontFamily: 'Cabin Sketch'
   },
   beerView: {
-    borderRadius: 8,
-    backgroundColor: '#A5D0A8',
+    borderRadius: 2,
+    backgroundColor: '#8693AB',
     margin: 10,
     padding: 10
   },
@@ -128,43 +127,14 @@ const styles = StyleSheet.create({
     padding: 10
   },  
   titleText: {
-    fontSize: 20,
+    fontSize: 30,
     fontFamily: 'Futura-CondensedMedium',
+    color: 'white'
   },
   baseText: {
     fontFamily: 'Futura-CondensedMedium',
     fontSize: 15    
   },  
 });
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center"
-//   },
-//   headerView: {
-//     textAlign: "center",
-//     fontFamily: "Cochin",
-//     fontSize: 20
-//   },
-//   logo: {
-//     fontSize: 30
-//   },
-//   baseText: {
-//     fontFamily: "Cochin"
-//   },
-//   titleText: {
-//     fontSize: 20,
-//     fontWeight: "bold"
-//   },
-//   beerView: {
-//     backgroundColor: "lightblue",
-//     borderRadius: 8,
-//     margin: 10,
-//     padding: 10
-//   }
-// });
 
 export { ProfileScreen };

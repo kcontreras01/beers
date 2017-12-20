@@ -17,7 +17,8 @@ import {
   SearchScreen,
   SignUp,
   ViewOne,
-  AddOne
+  AddOne,
+  LandingPage
 } from "./components";
 // Expo.Font.loadAsync('Cabin Sketch', 'https://fonts.googleapis.com/css?family=Cabin+Sketch');
 
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
 });
 
 const SimpleApp = StackNavigator({
-  Home: { screen: HomeScreen },
+  // Home: { screen: HomeScreen },
+  Home: {screen: LandingPage},
   Profile: { screen: ProfileScreen },
   Search: { screen: SearchScreen },
   SignUp: { screen: SignUp },
